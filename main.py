@@ -26,7 +26,6 @@ ABI = [
     {"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"}
 ]
 
-# Настройки
 contract_address = "0xCe64dA1992Cc2409E0f0CdCAAd64f8dd2dBe0093"  
 rpc_url = "https://rpc.scroll.io"  
 explorer_url = "https://scrollscan.com/tx/"  
@@ -44,7 +43,7 @@ headers = {
 }
 
 def read_private_keys(filename):
-    # print(f"Чтение приватных ключей из файла {filename}")
+    
     try:
         with open(filename, 'r') as file:
             keys = [line.strip() for line in file if line.strip()]
@@ -87,7 +86,7 @@ def claim_airdrop(private_key, amount, signature):
     
     try:
         # Увеличиваем цену газа
-        gas_price = w3.eth.gas_price * 1.2  # Увеличиваем на 20% от текущей цены газа
+        gas_price = w3.eth.gas_price * 1.2 
         
         # Увеличенный лимит газа
         tx = contract.functions.claim(amount, signature, "0x0000000000000000000000000000000000000000").build_transaction({
@@ -104,7 +103,7 @@ def claim_airdrop(private_key, amount, signature):
     try:
         # Подписание транзакции с приватным ключом
         signed_tx = w3.eth.account.sign_transaction(tx, private_key)
-        tx_hash = w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+        tx_hash = w3.eth.send_raw_transaction(signed_tx.raw_transaction)
         # Вывод ссылки на транзакцию в ScrollScan
         #print(f"Транзакция отправлена: {explorer_url}{w3.to_hex(tx_hash)}")
         
