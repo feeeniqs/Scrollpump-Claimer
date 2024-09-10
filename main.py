@@ -141,13 +141,12 @@ def main():
             # Вывод информации о сумме токенов для клейма
             print(f"Сумма для клейма: {amount / (10 ** 18)} токенов")
             claim_airdrop(private_key, amount, signature)
+            # Задержка между запросами
+            delay = random.randint(60, 90)
+            print(f"Ожидание {delay} секунд перед следующим запросом.")
+            time.sleep(delay)
         else:
             print(f"Не удалось получить сигнатуру или сумму для {user_address}")
-        
-        # Задержка между запросами
-        delay = random.randint(60, 90)
-        print(f"Ожидание {delay} секунд перед следующим запросом.")
-        time.sleep(delay)
 
 if __name__ == "__main__":
     main()
