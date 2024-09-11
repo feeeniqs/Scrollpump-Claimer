@@ -142,7 +142,12 @@ def main():
     for private_key in private_keys:
         account = Account.from_key(private_key)
         user_address = account.address
-        print(f"\nКлейм для адреса: {user_address}")
+        print(f"\nПроверка клейма для адреса: {user_address}")
+
+        # Проверяем, был ли уже произведен клейм
+        if is_already_claimed(user_address):
+            print(f"Клейм уже выполнен для {user_address}, пропускаем...")
+            continue
         
         signature, amount = get_signature(user_address)
         
