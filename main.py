@@ -56,6 +56,15 @@ def read_private_keys(filename):
         print(f"Файл {filename} не найден.")
         return []
 
+def is_already_claimed(address):
+    contract = w3.eth.contract(address=contract_address, abi=ABI)
+    try:
+        claimed = contract.functions.claimed(address).call()
+        return claimed
+    except Exception as e:
+        print(f"Ошибка при проверке клейма для {address}: {e}")
+        return False
+
 def get_signature(user_address):
     signature_url = f"https://api.scrollpump.xyz/api/Airdrop/GetSign?address={user_address}"
     try:
